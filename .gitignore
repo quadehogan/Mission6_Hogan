@@ -1,0 +1,28 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+## JetBrains Rider
+.idea/
+
+## Visual Studio
+.vs/
+*.rsuser
+*.csproj.user
+
+## User-specific files
+*.env
+appsettings.Local.json
+
+## OS
+.DS_Store
+Thumbs.db
