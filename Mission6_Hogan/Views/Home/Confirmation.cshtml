@@ -1,0 +1,11 @@
+@model Movie
+
+@{
+    ViewData["Title"] = "Add a new Movie";
+}
+
+<h1>Thank You for your information on @Model.Title</h1>
+@if (Model.LentTo != null)
+{
+    <p>I hope to see the @Model.Title back soon!</p>
+}
