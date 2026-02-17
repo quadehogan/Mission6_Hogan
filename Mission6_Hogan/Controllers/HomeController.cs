@@ -26,15 +26,78 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult MovieInput()
     {
-        return View();
+        ViewBag.Categories = _context.Categories
+            .OrderBy(m => m.CategoryName)
+            .ToList();
+        return View(new Movie());
     }
 
     [HttpPost]
     public IActionResult MovieInput(Movie movie)
     {
-        _context.Movies.Add(movie);
+        if (ModelState.IsValid)
+        {
+            _context.Movies.Add(movie);
+            _context.SaveChanges();
+            
+            return View("Confirmation", movie);
+        }
+        else
+        {
+            ViewBag.Categories = _context.Categories
+                .OrderBy(m => m.CategoryName)
+                .ToList();
+            return View(movie);
+        }
+        
+    }
+
+    [HttpGet]
+    public IActionResult ViewMovies()
+    {
+        var movies = _context.Movies
+            .OrderBy(m => m.MovieId).ToList();
+        return View(movies);
+    }
+
+    [HttpGet]
+    public IActionResult Edit(int id)
+    {
+        Movie movie = _context.Movies
+            .Single(m => m.MovieId == id);
+
+        ViewBag.Categories = _context.Categories
+            .OrderBy(m => m.CategoryName)
+            .ToList();
+        
+        return View("MovieInput", movie);
+    }
+    
+    [HttpGet]
+    public IActionResult Delete(int id)
+    {
+        Movie movieRemove = _context.Movies
+            .Single( m => m.MovieId == id);
+        
+        return View(movieRemove);
+    }
+
+    [HttpPost]
+    public IActionResult Edit(Movie movie)
+    {
+        _context.Update(movie);
         _context.SaveChanges();
-        return View("Confirmation", movie);
+
+        return RedirectToAction("ViewMovies");
+    }
+
+    [HttpPost]
+    public IActionResult Delete(Movie deleteMovie)
+    {
+        _context.Movies.Remove(deleteMovie);
+        _context.SaveChanges();
+        
+        return RedirectToAction("ViewMovies");
     }
     
 }

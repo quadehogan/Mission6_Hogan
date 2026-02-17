@@ -1,11 +1,17 @@
 @model Movie
 
 @{
-    ViewData["Title"] = "Add a new Movie";
+    ViewData["Title"] = "Movie Added";
 }
 
-<h1>Thank You for your information on @Model.Title</h1>
-@if (Model.LentTo != null)
-{
-    <p>I hope to see the @Model.Title back soon!</p>
-}
+<div class="container my-5">
+    <div class="alert alert-success" role="alert">
+        <h1 class="alert-heading">Thank You for your information on @Model.Title</h1>
+        @if (Model.LentTo != null)
+        {
+            <p>I hope to see the @Model.Title back soon!</p>
+        }
+    </div>
+    <a asp-controller="Home" asp-action="MovieInput" class="btn btn-primary me-2">Add Another Movie</a>
+    <a asp-controller="Home" asp-action="ViewMovies" class="btn btn-outline-secondary">Back to Movies</a>
+</div>

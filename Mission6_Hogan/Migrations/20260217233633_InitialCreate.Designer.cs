@@ -10,7 +10,7 @@ using Mission6_Hogan.Models;
 namespace Mission6_Hogan.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20260217202409_InitialCreate")]
+    [Migration("20260217233633_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
